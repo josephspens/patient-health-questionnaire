@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Component from './component';
 
-import Screener from '../screener';
+export const mapStateToProps = () => {
+  return {};
+};
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <Screener />
-      </div>
-    );
-  }
-}
+export const mapDispatchToProps = () => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
