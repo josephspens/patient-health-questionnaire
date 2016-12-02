@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import Component from './component';
 
 export const mapStateToProps = (state) => {
-  const { questions } = state;
-  return { questions };
+  const { questions, answers } = state;
+  return { questions, answers };
 };
 
 export const mapDispatchToProps = () => {

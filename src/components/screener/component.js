@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   Step,
   Stepper,
-  StepLabel,
+  StepButton,
   StepContent,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -10,7 +10,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 export default class Screener extends Component {
   static propTypes = {
-    questions: PropTypes.arrayOf(PropTypes.string).isRequired
+    questions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    answers: PropTypes.arrayOf(PropTypes.string).isRequired
   }
 
   state = {
@@ -37,16 +38,23 @@ export default class Screener extends Component {
     const { stepIndex } = this.state;
 
     return (
-      <div style={{ margin: '12px 0' }}>
-        <RaisedButton
-          label={stepIndex === 2 ? 'Finish' : 'Next'}
-          primary={true}
-          onTouchTap={this.handleNext}
-          style={{marginRight: 12}}
-        />
+      <div style={{
+        margin: '12px 0',
+        display: 'inline-flex',
+        flexDirection: 'column'
+      }}>
+        {this.props.answers.map((answer, index) => (
+          <RaisedButton
+            key={index}
+            label={answer}
+            primary={true}
+            onTouchTap={this.handleNext}
+            style={{ marginBottom: 12 }}
+          />
+        ))}
         {step > 0 && (
           <FlatButton
-            label="Back"
+            label='Back'
             disabled={stepIndex === 0}
             onTouchTap={this.handlePrev}
           />
@@ -59,10 +67,18 @@ export default class Screener extends Component {
     const { stepIndex } = this.state;
     return (
       <div>
-        <Stepper activeStep={stepIndex} orientation="vertical">
+        <Stepper
+          activeStep={stepIndex}
+          orientation='vertical'
+          linear={false}
+        >
           {this.props.questions.map((question, index) => (
             <Step key={index}>
-              <StepLabel>Question {index + 1}</StepLabel>
+              <StepButton
+                onTouchTap={() => this.setState({ stepIndex: index })}
+              >
+                Question {index + 1}
+              </StepButton>
               <StepContent>
                 <p>{question}</p>
                 {this.renderStepActions(index)}
