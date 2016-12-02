@@ -77,10 +77,9 @@ export default class Screener extends Component {
               <StepButton
                 onTouchTap={() => this.setState({ stepIndex: index })}
               >
-                Question {index + 1}
+                {question}
               </StepButton>
               <StepContent>
-                <p>{question}</p>
                 {this.renderStepActions(index)}
               </StepContent>
             </Step>
