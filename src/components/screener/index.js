@@ -36,8 +36,6 @@ export default class Screener extends Component {
       <div style={{ margin: '12px 0' }}>
         <RaisedButton
           label={stepIndex === 2 ? 'Finish' : 'Next'}
-          disableTouchRipple={true}
-          disableFocusRipple={true}
           primary={true}
           onTouchTap={this.handleNext}
           style={{marginRight: 12}}
@@ -46,8 +44,6 @@ export default class Screener extends Component {
           <FlatButton
             label="Back"
             disabled={stepIndex === 0}
-            disableTouchRipple={true}
-            disableFocusRipple={true}
             onTouchTap={this.handlePrev}
           />
         )}
