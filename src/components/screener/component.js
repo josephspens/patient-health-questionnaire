@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Step,
   Stepper,
@@ -9,10 +9,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class Screener extends Component {
+  static propTypes = {
+    questions: PropTypes.arrayOf(PropTypes.string).isRequired
+  }
+
   state = {
     finished: false,
     stepIndex: 0
-  };
+  }
 
   handleNext = () => {
     const { stepIndex } = this.state;
@@ -56,36 +60,15 @@ export default class Screener extends Component {
     return (
       <div>
         <Stepper activeStep={stepIndex} orientation="vertical">
-          <Step>
-            <StepLabel>Select campaign settings</StepLabel>
-            <StepContent>
-              <p>
-                For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.
-              </p>
-              {this.renderStepActions(0)}
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Create an ad group</StepLabel>
-            <StepContent>
-              <p>An ad group contains one or more ads which target a shared set of keywords.</p>
-              {this.renderStepActions(1)}
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Create an ad</StepLabel>
-            <StepContent>
-              <p>
-                Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.
-              </p>
-              {this.renderStepActions(2)}
-            </StepContent>
-          </Step>
+          {this.props.questions.map((question, index) => (
+            <Step key={index}>
+              <StepLabel>Question {index + 1}</StepLabel>
+              <StepContent>
+                <p>{question}</p>
+                {this.renderStepActions(index)}
+              </StepContent>
+            </Step>
+          ))}
         </Stepper>
       </div>
     );

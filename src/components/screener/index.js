@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import Component from './component';
 
-export const mapStateToProps = () => {
-  return {};
+export const mapStateToProps = (state) => {
+  const { questions } = state;
+  return { questions };
 };
 
 export const mapDispatchToProps = () => {
