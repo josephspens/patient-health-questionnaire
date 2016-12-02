@@ -5,13 +5,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'react-router-redux';
 
 // import saga from '../sagas';
-// import reducer from '../reducers';
+import reducer from '../reducers';
 
 // const sagaMiddleware = createSagaMiddleware();
 
 export default createStore(
-  // reducer,
-  () => {},
+  reducer,
   composeWithDevTools(
     applyMiddleware(
       // sagaMiddleware,
