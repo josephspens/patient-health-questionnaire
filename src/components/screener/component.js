@@ -11,7 +11,8 @@ import FlatButton from 'material-ui/FlatButton';
 export default class Screener extends Component {
   static propTypes = {
     questions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    answers: PropTypes.arrayOf(PropTypes.string).isRequired
+    answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+    results: PropTypes.objectOf(PropTypes.string).isRequired
   }
 
   state = {
@@ -19,12 +20,13 @@ export default class Screener extends Component {
     stepIndex: 0
   }
 
-  handleNext = () => {
+  answerQuestion = (question, answer) => {
     const { stepIndex } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
+      finished: stepIndex >= this.props.questions.length,
     });
+    this.props.addAnswer(question, answer);
   }
 
   handlePrev = () => {
@@ -34,7 +36,7 @@ export default class Screener extends Component {
     }
   };
 
-  renderStepActions = (step) => {
+  renderStepActions = (question) => {
     const { stepIndex } = this.state;
 
     return (
@@ -48,11 +50,11 @@ export default class Screener extends Component {
             key={index}
             label={answer}
             primary={true}
-            onTouchTap={this.handleNext}
+            onTouchTap={() => this.answerQuestion(question, answer)}
             style={{ marginBottom: 12 }}
           />
         ))}
-        {step > 0 && (
+        {question > 0 && (
           <FlatButton
             label='Back'
             disabled={stepIndex === 0}
@@ -77,7 +79,15 @@ export default class Screener extends Component {
               <StepButton
                 onTouchTap={() => this.setState({ stepIndex: index })}
               >
-                {question}
+                {question} {this.props.results[index] && (
+                  <span style={{
+                    fontStyle: 'italic',
+                    fontWeight: 'bold',
+                    marginLeft: 5
+                  }}>
+                    - {this.props.results[index]}
+                  </span>
+                )}
               </StepButton>
               <StepContent>
                 {this.renderStepActions(index)}
