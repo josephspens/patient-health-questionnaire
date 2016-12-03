@@ -68,34 +68,32 @@ export default class Screener extends Component {
   render() {
     const { stepIndex } = this.state;
     return (
-      <div>
-        <Stepper
-          activeStep={stepIndex}
-          orientation='vertical'
-          linear={false}
-        >
-          {this.props.questions.map((question, index) => (
-            <Step key={index}>
-              <StepButton
-                onTouchTap={() => this.setState({ stepIndex: index })}
-              >
-                {question} {this.props.results[index] && (
-                  <span style={{
-                    fontStyle: 'italic',
-                    fontWeight: 'bold',
-                    marginLeft: 5
-                  }}>
-                    - {this.props.results[index]}
-                  </span>
-                )}
-              </StepButton>
-              <StepContent>
-                {this.renderStepActions(index)}
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
+      <Stepper
+        activeStep={stepIndex}
+        orientation='vertical'
+        linear={false}
+      >
+        {this.props.questions.map((question, index) => (
+          <Step key={index}>
+            <StepButton
+              onTouchTap={() => this.setState({ stepIndex: index })}
+            >
+              {question} {this.props.results[index] && (
+                <span style={{
+                  fontStyle: 'italic',
+                  fontWeight: 'bold',
+                  marginLeft: 5
+                }}>
+                  - {this.props.results[index]}
+                </span>
+              )}
+            </StepButton>
+            <StepContent>
+              {this.renderStepActions(index)}
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
     );
   }
 }
