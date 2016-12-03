@@ -41,9 +41,7 @@ export default class Screener extends Component {
 
     return (
       <div style={{
-        margin: '12px 0',
-        display: 'inline-flex',
-        flexDirection: 'column'
+        margin: '1em 0'
       }}>
         {this.props.answers.map((answer, index) => (
           <RaisedButton
@@ -51,16 +49,9 @@ export default class Screener extends Component {
             label={answer}
             primary={true}
             onTouchTap={() => this.answerQuestion(question, answer)}
-            style={{ marginBottom: 12 }}
+            style={{ marginRight: '1em' }}
           />
         ))}
-        {question > 0 && (
-          <FlatButton
-            label='Back'
-            disabled={stepIndex === 0}
-            onTouchTap={this.handlePrev}
-          />
-        )}
       </div>
     );
   }
@@ -74,17 +65,29 @@ export default class Screener extends Component {
         linear={false}
       >
         {this.props.questions.map((question, index) => (
-          <Step key={index}>
+          <Step
+            key={index}
+            completed={this.props.results[index]}
+          >
             <StepButton
               onTouchTap={() => this.setState({ stepIndex: index })}
+              style={{ textAlign: 'left' }}
             >
-              {question} {this.props.results[index] && (
+              <span
+                style={{
+                  flexGrow: 1
+                }}
+              >
+                {question}
+              </span>
+              {this.props.results[index] && (
                 <span style={{
                   fontStyle: 'italic',
                   fontWeight: 'bold',
-                  marginLeft: 5
+                  marginLeft: '1em',
+                  textAlign: 'right'
                 }}>
-                  - {this.props.results[index]}
+                  {this.props.results[index]}
                 </span>
               )}
             </StepButton>

@@ -8,8 +8,9 @@ export default class App extends Component {
     return (
       <Paper
         style={{
-          width: '40em',
-          margin: '10em auto'
+          width: '55em',
+          margin: '5em auto',
+          padding: '2em'
         }}
       >
         <Screener />
