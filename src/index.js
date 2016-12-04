@@ -23,6 +23,7 @@ ReactDOM.render(
       <Router history={syncHistoryWithStore(browserHistory, store)}>
         <Route path="/" component={App}>
           <IndexRoute component={Questionnaire} />
+          <Route path="/recommendations" component={Thanks} />
           <Route path="/thank-you" component={Thanks} />
         </Route>
       </Router>

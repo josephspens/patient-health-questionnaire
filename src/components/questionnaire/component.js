@@ -19,7 +19,7 @@ export default class Questionnaire extends Component {
             <FlatButton
               label='Finish'
               secondary={true}
-              onTouchTap={() => {}}
+              onTouchTap={() => this.props.requiresTherapist ? this.props.goToTherapists() : this.props.goToThankYou()}
               style={{
                 margin: '2em 5em',
                 width: 'calc(100% - 10em)'
