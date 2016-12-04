@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Paper } from 'material-ui';
 
-export default class App extends Component {
+export default class Thanks extends Component {
   render() {
     return (
       <Paper

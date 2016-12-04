@@ -13,6 +13,7 @@ injectTapEventPlugin();
 
 import App from './components/app';
 import Questionnaire from './components/questionnaire';
+import Recommendations from './components/recommendations';
 import Thanks from './components/thanks';
 import store from './store';
 import './index.css';
@@ -23,7 +24,7 @@ ReactDOM.render(
       <Router history={syncHistoryWithStore(browserHistory, store)}>
         <Route path="/" component={App}>
           <IndexRoute component={Questionnaire} />
-          <Route path="/recommendations" component={Thanks} />
+          <Route path="/recommendations" component={Recommendations} />
           <Route path="/thank-you" component={Thanks} />
         </Route>
       </Router>
