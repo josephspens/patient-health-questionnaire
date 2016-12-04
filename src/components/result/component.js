@@ -12,6 +12,8 @@ import {
   SocialSentimentVeryDissatisfied,
 } from 'material-ui/svg-icons';
 
+import styles from './component.styles';
+
 export default class Result extends Component {
   static propTypes = {
     results: PropTypes.objectOf(
@@ -50,8 +52,8 @@ export default class Result extends Component {
       <Stepper
         linear={false}
         style={{
-          backgroundColor: this.props.muiTheme.palette.primary1Color,
-          padding: '0 1em'
+          ...styles.stepper,
+          backgroundColor: this.props.muiTheme.palette.primary1Color
         }}
       >
         {this.props.degreesOfDepression.map((degree, index) => {

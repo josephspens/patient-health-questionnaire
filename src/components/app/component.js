@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
+import styles from './component.styles';
+
 export default class App extends Component {
   render() {
     return (
       <div
         style={{
-          padding: '5em 0',
-          backgroundColor: this.props.muiTheme.palette.accent2Color,
-          minHeight: '100%',
-          boxSizing: 'border-box'
+          ...styles.container,
+          backgroundColor: this.props.muiTheme.palette.accent2Color
         }}
       >
         {this.props.children}

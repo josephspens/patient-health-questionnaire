@@ -1,28 +1,16 @@
 import React, { Component } from 'react';
+
 import Therapist from '../therapist';
+import styles from './component.styles';
 
 export default class Recommendations extends Component {
   render() {
     return (
-      <div
-        style={{
-          padding: '0 10em'
-        }}
-      >
-        <h1
-          style={{
-            textAlign: 'center',
-            marginBottom: '2em'
-          }}
-        >
+      <div style={styles.container}>
+        <h1 style={styles.hero}>
           We would like to recommend a therapist.
         </h1>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}
-        >
+        <div style={styles.list}>
           {this.props.therapists.map(therapist => (
             <Therapist
               key={therapist.id}

@@ -3,16 +3,12 @@ import { Paper, FlatButton } from 'material-ui';
 
 import Screener from '../screener';
 import Result from '../result';
+import styles from './component.styles'
 
 export default class Questionnaire extends Component {
   render() {
     return (
-      <Paper
-        style={{
-          width: '55em',
-          margin: '0 auto'
-        }}
-      >
+      <Paper style={styles.container}>
         <Screener />
         {this.props.finished && (
           <div>
@@ -20,10 +16,7 @@ export default class Questionnaire extends Component {
               label='Finish'
               secondary={true}
               onTouchTap={() => this.props.requiresTherapist ? this.props.goToTherapists() : this.props.goToThankYou()}
-              style={{
-                margin: '2em 5em',
-                width: 'calc(100% - 10em)'
-              }}
+              style={styles.requestButton}
             />
           </div>
         )}

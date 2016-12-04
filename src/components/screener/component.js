@@ -7,6 +7,8 @@ import {
 } from 'material-ui/Stepper';
 import { RaisedButton } from 'material-ui';
 
+import styles from './component.styles';
+
 export default class Screener extends Component {
   static propTypes = {
     questions: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -29,16 +31,14 @@ export default class Screener extends Component {
   }
 
   renderStepActions = (question) => (
-    <div style={{
-      margin: '1em 0'
-    }}>
+    <div style={styles.answerContainer}>
       {this.props.answers.map((answer, index) => (
         <RaisedButton
           key={index}
           label={answer}
           primary={true}
           onTouchTap={() => this.addAnswer(question, answer, index)}
-          style={{ marginRight: '1em' }}
+          style={styles.answerButton}
         />
       ))}
     </div>
@@ -50,7 +50,7 @@ export default class Screener extends Component {
         activeStep={this.state.stepIndex}
         orientation='vertical'
         linear={false}
-        style={{ padding: '1em' }}
+        style={styles.container}
       >
         {this.props.questions.map((question, index) => (
           <Step
@@ -59,23 +59,13 @@ export default class Screener extends Component {
           >
             <StepButton
               onTouchTap={() => this.setState({ stepIndex: index })}
-              style={{ textAlign: 'left' }}
+              style={styles.question}
             >
-              <span
-                style={{
-                  flexGrow: 1
-                }}
-              >
+              <span style={styles.questionText}>
                 {question}
               </span>
               {this.props.results[index] && (
-                <span style={{
-                  fontStyle: 'italic',
-                  fontWeight: 'bold',
-                  marginLeft: '1em',
-                  textAlign: 'right',
-                  whiteSpace: 'nowrap'
-                }}>
+                <span style={styles.answerText}>
                   {this.props.results[index].answer}
                 </span>
               )}
