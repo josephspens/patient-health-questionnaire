@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { Paper } from 'material-ui';
-
-import Screener from '../screener';
 
 export default class App extends Component {
   render() {
     return (
-      <Paper
+      <div
         style={{
-          width: '55em',
-          margin: '5em auto',
-          padding: '2em'
+          padding: '5em 0',
+          backgroundColor: this.props.muiTheme.palette.accent2Color,
+          minHeight: '100%',
+          boxSizing: 'border-box'
         }}
       >
-        <Screener />
-      </Paper>
+        {this.props.children}
+      </div>
     );
   }
 }

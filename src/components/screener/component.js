@@ -5,69 +5,57 @@ import {
   StepButton,
   StepContent,
 } from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import { RaisedButton } from 'material-ui';
 
 export default class Screener extends Component {
   static propTypes = {
     questions: PropTypes.arrayOf(PropTypes.string).isRequired,
     answers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    results: PropTypes.objectOf(PropTypes.string).isRequired
+    results: PropTypes.objectOf(
+      PropTypes.shape({
+        answer: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired
+      }).isRequired
+    ).isRequired
   }
 
   state = {
-    finished: false,
     stepIndex: 0
   }
 
-  answerQuestion = (question, answer) => {
-    const { stepIndex } = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= this.props.questions.length,
-    });
-    this.props.addAnswer(question, answer);
+  addAnswer(question, answer, value) {
+    this.setState({ stepIndex: this.state.stepIndex + 1 });
+    this.props.addAnswer(question, answer, value);
   }
 
-  handlePrev = () => {
-    const { stepIndex } = this.state;
-    if (stepIndex > 0) {
-      this.setState({ stepIndex: stepIndex - 1 });
-    }
-  };
-
-  renderStepActions = (question) => {
-    const { stepIndex } = this.state;
-
-    return (
-      <div style={{
-        margin: '1em 0'
-      }}>
-        {this.props.answers.map((answer, index) => (
-          <RaisedButton
-            key={index}
-            label={answer}
-            primary={true}
-            onTouchTap={() => this.answerQuestion(question, answer)}
-            style={{ marginRight: '1em' }}
-          />
-        ))}
-      </div>
-    );
-  }
+  renderStepActions = (question) => (
+    <div style={{
+      margin: '1em 0'
+    }}>
+      {this.props.answers.map((answer, index) => (
+        <RaisedButton
+          key={index}
+          label={answer}
+          primary={true}
+          onTouchTap={() => this.addAnswer(question, answer, index)}
+          style={{ marginRight: '1em' }}
+        />
+      ))}
+    </div>
+  );
 
   render() {
-    const { stepIndex } = this.state;
     return (
       <Stepper
-        activeStep={stepIndex}
+        activeStep={this.state.stepIndex}
         orientation='vertical'
         linear={false}
+        style={{ padding: '1em' }}
       >
         {this.props.questions.map((question, index) => (
           <Step
             key={index}
-            completed={this.props.results[index]}
+            completed={!!this.props.results[index]}
           >
             <StepButton
               onTouchTap={() => this.setState({ stepIndex: index })}
@@ -85,9 +73,10 @@ export default class Screener extends Component {
                   fontStyle: 'italic',
                   fontWeight: 'bold',
                   marginLeft: '1em',
-                  textAlign: 'right'
+                  textAlign: 'right',
+                  whiteSpace: 'nowrap'
                 }}>
-                  {this.props.results[index]}
+                  {this.props.results[index].answer}
                 </span>
               )}
             </StepButton>

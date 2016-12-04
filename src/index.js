@@ -3,22 +3,28 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
-import App from './components/app';
-import store from './store';
 import 'normalize-css';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+import App from './components/app';
+import Questionnaire from './components/questionnaire';
+import Thanks from './components/thanks';
+import store from './store';
+import './index.css';
+
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
       <Router history={syncHistoryWithStore(browserHistory, store)}>
-        <Route path="/" component={App} />
+        <Route path="/" component={App}>
+          <IndexRoute component={Questionnaire} />
+          <Route path="/thank-you" component={Thanks} />
+        </Route>
       </Router>
     </MuiThemeProvider>
   </Provider>,

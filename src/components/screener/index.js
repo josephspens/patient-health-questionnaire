@@ -10,7 +10,7 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    addAnswer: (question, answer) => dispatch(Actions.addAnswer(question, answer))
+    addAnswer: (question, answer, value) => dispatch(Actions.addAnswer(question, answer, value))
   };
 };
 
