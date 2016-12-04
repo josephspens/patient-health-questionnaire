@@ -5,7 +5,7 @@ import Component from './component';
 
 export const mapStateToProps = (state, ownProps) => {
   const therapist = state.therapists.find(therapist => therapist.id === ownProps.id);
-  return { ...therapist };
+  return { therapist };
 };
 
 export const mapDispatchToProps = (dispatch) => {

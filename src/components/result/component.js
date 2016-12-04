@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   Step,
   Stepper,
@@ -13,24 +13,10 @@ import {
 } from 'material-ui/svg-icons';
 
 import styles from './component.styles';
+import propTypes from './component.propTypes';
 
 export default class Result extends Component {
-  static propTypes = {
-    results: PropTypes.objectOf(
-      PropTypes.shape({
-        answer: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired
-      }).isRequired
-    ).isRequired,
-    score: PropTypes.number.isRequired,
-    degreesOfDepression: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        min: PropTypes.number.isRequired,
-        max: PropTypes.number.isRequired
-      }).isRequired
-    ).isRequired
-  }
+  static propTypes = propTypes
 
   getIcon(index, color) {
     switch (index) {

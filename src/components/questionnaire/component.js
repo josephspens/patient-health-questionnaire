@@ -3,9 +3,12 @@ import { Paper, FlatButton } from 'material-ui';
 
 import Screener from '../screener';
 import Result from '../result';
-import styles from './component.styles'
+import styles from './component.styles';
+import propTypes from './component.propTypes';
 
 export default class Questionnaire extends Component {
+  static propTypes = propTypes
+
   render() {
     return (
       <Paper style={styles.container}>

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 
 import Therapist from '../therapist';
 import styles from './component.styles';
+import propTypes from './component.propTypes';
 
 export default class Recommendations extends Component {
+  static propTypes = propTypes
+
   render() {
     return (
       <div style={styles.container}>

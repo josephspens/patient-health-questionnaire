@@ -14,13 +14,13 @@ export default class Therapist extends Component {
           }}
         >
           <Avatar
-            src={this.props.avatar}
+            src={this.props.therapist.avatar}
             size={200}
           />
         </div>
         <div style={styles.content}>
-          <h1>{this.props.name}</h1>
-          <p>{this.props.bio}</p>
+          <h1>{this.props.therapist.name}</h1>
+          <p>{this.props.therapist.bio}</p>
         </div>
         <FlatButton
           label='Request A Consult'

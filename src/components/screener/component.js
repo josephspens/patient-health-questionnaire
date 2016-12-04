@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   Step,
   Stepper,
@@ -8,18 +8,10 @@ import {
 import { RaisedButton } from 'material-ui';
 
 import styles from './component.styles';
+import propTypes from './component.propTypes';
 
 export default class Screener extends Component {
-  static propTypes = {
-    questions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    answers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    results: PropTypes.objectOf(
-      PropTypes.shape({
-        answer: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired
-      }).isRequired
-    ).isRequired
-  }
+  static propTypes = propTypes
 
   state = {
     stepIndex: 0
