@@ -8,7 +8,9 @@ export default class Therapist extends Component {
         style={{
           width: '20em',
           textAlign: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
         <div
@@ -18,17 +20,21 @@ export default class Therapist extends Component {
           }}
         >
           <Avatar
-            src='https://placekitten.com/g/200/300'
+            src={this.props.avatar}
             size={200}
           />
         </div>
-        <div style={{ padding: '0 1em' }}>
-          <h1>Person 1</h1>
-          <p>Aliquip elit pariatur pariatur sint aliquip qui nisi consequat do do do commodo eu magna. Reprehenderit exercitation officia proident pariatur in reprehenderit fugiat quis incididunt enim esse incididunt laboris ut consequat ullamco et.</p>
+        <div style={{
+          padding: '0 1em',
+          flexGrow: 1
+        }}>
+          <h1>{this.props.name}</h1>
+          <p>{this.props.bio}</p>
         </div>
         <FlatButton
-          label="Request A Consult"
+          label='Request A Consult'
           primary={true}
+          onClick={() => this.props.requestTherapist()}
           style={{ width: '100%' }}
         />
       </Paper>
