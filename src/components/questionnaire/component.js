@@ -14,14 +14,12 @@ export default class Questionnaire extends Component {
       <Paper style={styles.container}>
         <Screener />
         {this.props.finished && (
-          <div>
-            <FlatButton
-              label='Finish'
-              secondary={true}
-              onTouchTap={() => this.props.requiresTherapist ? this.props.goToTherapists() : this.props.goToThankYou()}
-              style={styles.requestButton}
-            />
-          </div>
+          <FlatButton
+            label='Finish'
+            secondary={true}
+            onTouchTap={() => this.props.requiresTherapist ? this.props.goToTherapists() : this.props.goToThankYou()}
+            style={styles.requestButton}
+          />
         )}
         <Result />
       </Paper>

@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.7.0"
+    "chai": "^3.5.0",
+    "dirty-chai": "^1.2.2",
+    "enzyme": "^2.6.0",
+    "react-addons-test-utils": "^15.4.1",
+    "react-scripts": "0.7.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "material-ui": "^0.16.1",
