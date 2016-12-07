@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import Component from './component';
 
 export const mapStateToProps = (state, ownProps) => {
+  // find the therapist from the redux store given the passed in `id` prop
   const therapist = state.therapists.find(therapist => therapist.id === ownProps.id);
   return { therapist };
 };

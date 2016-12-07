@@ -1,3 +1,36 @@
+# Patient Health Questionnaire
+
+In order to run the client application locally:
+1. `git clone git@github.com:josephspens/patient-health-questionnaire.git`
+2. `cd patient-health-questionnaire`
+3. `npm install`
+4. `npm start`
+
+To run the node server locally:
+1. `npm run build`
+2. `cd server`
+3. `npm start`
+
+## The Approach
+
+The project create-react-app has suited me well in the past when I wanted to create some quick react application like this one. It removes complexity usually associated with scaffolding a webpack/react application, allowing you to being working on features immediately.
+
+Like most of my other projects I broke up the client source into `actions`, `components` (both presentational and container), `constants` (initally kept in actions, but realized these are more widely used), `reducers`, `store` (could also be a single file excluding propTypes), and of course the main `index.js`. This file structure is very common across react/redux applications.
+
+The primary focus is in the components directory. Here I like grouping files according to their functional component. The presentational components, container components, tests, proptypes, and styles are kept together for easier maintenance. I'm a fan of composing JSON style mappings, that way you can easily construct a theme provider and reuse components and applications across themes. Proptypes are in their own files to clear out the component files of extra noise, and it allows proptype reuse across components (these are found in the store directory, for a lack of a better place to put them).
+
+With an robust internal component library, and organization would theoretically pull out all `component.*` files and drop them into a `lib` directory, to be imported into these components for use. Such a systems design would afford much more code reuse.
+
+You may have noticed I heavily relied on `material-ui`. When it comes to style guides, if it ain't broken, don't fix it. Unless you're a larger company, a custom built style guide is overkill and not part of your business objectives. Until then, reuse an existing style guide which you can extend and theme.
+
+I generally use sagas in all my redux applications. I maintain a series of root level objects in the store which contain API data... an array (or object) of the API payload, along with various metadata. The `didInvalidate` property is used to tell React views to re-fetch data when it has become stale. I didn't need to use sagas in this application, or any server communication for that matter, I figured it was worth calling out.
+
+In addition to "API objects" in the store, I also keep objects I compose with data from various sources, in this case the results property. I would rather not modify a store object which could later be overwritten by a fetch, so keeping them separate is generally a good practice.
+
+Despite popular opinion, I don't hate the React state. I believe it has it's purpose, for instance maintaining the state of some purely visual element of a presentational component, in this case I used it to track the current step in the questionnaire. That is something I deemed unnecessary for other components to be aware of, so rather than polluting my global store with useless data, I kept it in the component. Generally data will be accessed across multiple components, which is why most data goes in the redux store.
+
+# Create React App
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
