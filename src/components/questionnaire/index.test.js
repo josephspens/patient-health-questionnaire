@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import { push } from 'react-router-redux';
 
 chai.use(sinonChai);
 
@@ -8,34 +9,75 @@ import { mapStateToProps, mapDispatchToProps } from './index';
 import * as Actions from '../../actions/answers';
 
 const state = {
-  questions: [],
-  degreesOfDepression: [],
+  questions: ['','','',''],
+  degreesOfDepression: [
+    {
+      text: 'None',
+      min: 0,
+      max: 4
+    },
+    {
+      text: 'Mild',
+      min: 5,
+      max: 9
+    },
+    {
+      text: 'Moderate',
+      min: 10,
+      max: 14
+    },
+    {
+      text: 'Moderately Severe',
+      min: 15,
+      max: 19
+    },
+    {
+      text: 'Severe',
+      min: 20,
+      max: 27
+    }
+  ],
   results: {
-    'foo': { value: 10 },
-    'bar': { value: 20 },
-    'baz': { value: 35 }
+    'foo': { value: 2 },
+    'bar': { value: 3 },
+    'baz': { value: 2 }
   }
 }
 const dispatch = sinon.spy();
 
-xit('returns questions from the state', () => {
-  expect(mapStateToProps(state)).to.have.property('questions');
-  expect(mapStateToProps(state).questions).to.equal(state.questions);
+it('determines you are finished if you answered all the questions', () => {
+  expect(mapStateToProps(state)).to.have.property('finished');
+  expect(mapStateToProps(state).finished).to.be.false;
+  const results = {
+    'foo': { value: 4 },
+    'bar': { value: 4 },
+    'baz': { value: 4 },
+    'biz': { value: 4 }
+  }
+  expect(mapStateToProps({ ...state, results }).finished).to.be.true;
 });
 
-xit('returns answers from the state', () => {
-  expect(mapStateToProps(state)).to.have.property('answers');
-  expect(mapStateToProps(state).answers).to.equal(state.answers);
+it('determines you require a therapist if your score is above the moderate minimum', () => {
+  expect(mapStateToProps(state)).to.have.property('requiresTherapist');
+  expect(mapStateToProps(state).requiresTherapist).to.be.false;
+  const results = {
+    'foo': { value: 4 },
+    'bar': { value: 4 },
+    'baz': { value: 4 }
+  }
+  expect(mapStateToProps({ ...state, results }).requiresTherapist).to.be.true;
 });
 
-xit('returns results from the state', () => {
-  expect(mapStateToProps(state)).to.have.property('results');
-  expect(mapStateToProps(state).results).to.equal(state.results);
-});
-
-xit('returns a function which dispatches an addAnswer action', () => {
-  expect(mapDispatchToProps(dispatch)).to.have.property('addAnswer');
-  mapDispatchToProps(dispatch).addAnswer();
+it('returns a function which navigates to "thank-you"', () => {
+  expect(mapDispatchToProps(dispatch)).to.have.property('goToTherapists');
+  mapDispatchToProps(dispatch).goToTherapists();
   expect(dispatch).to.have.been.called;
-  expect(dispatch).to.have.been.calledWith(Actions.addAnswer());
+  expect(dispatch).to.have.been.calledWith(push('/recommendations'));
+});
+
+it('returns a function which navigates to "thank-you"', () => {
+  expect(mapDispatchToProps(dispatch)).to.have.property('goToThankYou');
+  mapDispatchToProps(dispatch).goToThankYou();
+  expect(dispatch).to.have.been.called;
+  expect(dispatch).to.have.been.calledWith(push('/thank-you'));
 });

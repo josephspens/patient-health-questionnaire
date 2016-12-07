@@ -4,7 +4,8 @@ export default {
     margin: '0 auto'
   },
   requestButton: {
-    margin: '2em 5em',
-    width: 'calc(100% - 10em)'
+    margin: '2em auto',
+    width: '10em',
+    display: 'block'
   }
 };

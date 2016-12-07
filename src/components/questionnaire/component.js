@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, FlatButton } from 'material-ui';
+import { Paper, RaisedButton } from 'material-ui';
 
 import Screener from '../screener';
 import Result from '../result';
@@ -14,7 +14,7 @@ export default class Questionnaire extends Component {
       <Paper style={styles.container}>
         <Screener />
         {this.props.finished && (
-          <FlatButton
+          <RaisedButton
             label='Finish'
             secondary={true}
             onTouchTap={() => this.props.requiresTherapist ? this.props.goToTherapists() : this.props.goToThankYou()}
