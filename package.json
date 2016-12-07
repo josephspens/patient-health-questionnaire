@@ -4,6 +4,7 @@
   "author": "Joseph Spens <jpspens@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "preinstall": "cd server && npm install && cd -",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
