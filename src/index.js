@@ -15,6 +15,7 @@ import App from './components/app';
 import Questionnaire from './components/questionnaire';
 import Recommendations from './components/recommendations';
 import Thanks from './components/thanks';
+import NotFound from './components/notFound';
 import store from './store';
 import './index.css';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
           <IndexRoute component={Questionnaire} />
           <Route path="/recommendations" component={Recommendations} />
           <Route path="/thank-you" component={Thanks} />
+          <Route path="*" component={NotFound} />
         </Route>
       </Router>
     </MuiThemeProvider>
