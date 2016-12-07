@@ -1,12 +1,14 @@
 # Patient Health Questionnaire
 
 In order to run the client application locally:
+
 1. `git clone git@github.com:josephspens/patient-health-questionnaire.git`
 2. `cd patient-health-questionnaire`
 3. `npm install`
 4. `npm start`
 
 To run the node server locally:
+
 1. `npm run build`
 2. `cd server`
 3. `npm start`
